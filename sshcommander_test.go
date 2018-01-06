@@ -7,7 +7,7 @@ import (
 
 func TestNewSSHCommander( t *testing.T) {
   commander := sshcommander.SSHCommander{"root", "localhost", 22, ""}
-  err := commander.Command("echo hellocommand")
+  _, err := commander.Command("echo hellocommand")
   assert.Equal(t, err, nil)
 }
 //////////////////////////////////////////////////////////////////////
@@ -51,4 +51,12 @@ func TestCommand_CallsInjectedFakeExecuter( t *testing.T) {
   commander.Command("cat /etc/issue")
   assert.Equal(t, true, globalCheck)
   assert.Equal(t, "ssh -p 20010 myuser@differenthost \"cat /etc/issue\"", globalCommandString)
+}
+
+func TestCommand_CallsInjectedFakeExecuter_ReturnsOutput( t *testing.T) {
+  faker := FakeOSCommandExecuter{}
+  sshcommander.InjectOSCommandExecuter(faker)
+  commander := sshcommander.SSHCommander{"myuser", "differenthost", 20010, ""}
+  out, _ := commander.Command("cat /etc/issue")
+  assert.Equal(t, "", out)
 }

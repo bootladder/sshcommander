@@ -1,8 +1,10 @@
 package sshcommander
+
 import (
   "fmt"
   "strings"
 )
+
 type SSHCommander struct {
   User, Hostname string
   Port int
@@ -16,7 +18,7 @@ type OSCommandExecuter interface {
 }
 
 
-func (s *SSHCommander) Command(commandstring string) (err error) {
+func (s *SSHCommander) Command(commandstring string) (out string,err error) {
   if myOSCommandExecuter == nil {
     fmt.Print("nil myOSCommandExecuter ! Must inject")
   }  else{
