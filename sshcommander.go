@@ -9,12 +9,20 @@ type SSHCommander struct {
   Key string
 }
 
-type OSCommandExecuter interface {
+var myOSCommandExecuter OSCommandExecuter
 
+type OSCommandExecuter interface {
+  Execute(commandstring string)
 }
 
 
 func (s *SSHCommander) Command(commandstring string) (err error) {
+  if myOSCommandExecuter == nil {
+    fmt.Print("nil myOSCommandExecuter ! Must inject")
+  }  else{
+    fullSSHcommandline, _ := s.CreateCommandString(commandstring)
+    myOSCommandExecuter.Execute(fullSSHcommandline)
+  }
   return
 }
 
@@ -29,5 +37,5 @@ func (s *SSHCommander) CreateCommandString(commandstring string) (out string, er
 }
 
 func InjectOSCommandExecuter( z OSCommandExecuter) {
-
+  myOSCommandExecuter = z
 }

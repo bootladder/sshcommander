@@ -29,7 +29,26 @@ func TestCreateCommandStringSetsPortHostUser( t *testing.T) {
 //////////////////////////////////////////////////////////////////////
 // Check that we can inject an OSCommandExecuter
 type FakeOSCommandExecuter struct {}
+var globalCheck bool = false
+var globalCommandString string
+
+func (f FakeOSCommandExecuter) Execute(commandstring string) {
+  globalCheck = true
+  globalCommandString  = commandstring
+}
+
 func TestInjectOSCommandExecuter( t *testing.T) {
   faker := FakeOSCommandExecuter{}
   sshcommander.InjectOSCommandExecuter(faker)
+  commander := sshcommander.SSHCommander{"myuser", "differenthost", 20010, ""}
+  commander.Command("echo newcommand")
+}
+
+func TestCommand_CallsInjectedFakeExecuter( t *testing.T) {
+  faker := FakeOSCommandExecuter{}
+  sshcommander.InjectOSCommandExecuter(faker)
+  commander := sshcommander.SSHCommander{"myuser", "differenthost", 20010, ""}
+  commander.Command("cat /etc/issue")
+  assert.Equal(t, true, globalCheck)
+  assert.Equal(t, "ssh -p 20010 myuser@differenthost \"cat /etc/issue\"", globalCommandString)
 }
