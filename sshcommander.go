@@ -23,7 +23,7 @@ func (s *SSHCommander) Command(commandstring string) (out string,err error) {
     fmt.Print("nil myOSCommandExecuter ! Must inject")
   }  else{
     fullSSHcommandline, _ := s.CreateCommandString(commandstring)
-    myOSCommandExecuter.Execute(fullSSHcommandline)
+    out,err = myOSCommandExecuter.Execute(fullSSHcommandline)
   }
   return
 }
@@ -33,7 +33,7 @@ func (s *SSHCommander) CreateCommandString(commandstring string) (out string, er
   cmd := []string{
     fmt.Sprintf("ssh -p %d %s@%s", s.Port, s.User, s.Hostname),
   }
-  cmd = append(cmd, " ", "\"",commandstring, "\"")
+  cmd = append(cmd, " ", commandstring)
 
   return  strings.Join(cmd,""),nil
 }

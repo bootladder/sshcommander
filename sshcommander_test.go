@@ -14,17 +14,17 @@ func TestNewSSHCommander( t *testing.T) {
 func TestCreateCommandString( t *testing.T) {
   commander := sshcommander.SSHCommander{"root", "localhost", 22, ""}
   actualResult, _ := commander.CreateCommandString("echo hellocommand")
-  assert.Equal(t, "ssh -p 22 root@localhost \"echo hellocommand\"", actualResult)
+  assert.Equal(t, "ssh -p 22 root@localhost echo hellocommand", actualResult)
 }
 func TestCreateCommandStringSetsTargetCommand( t *testing.T) {
   commander := sshcommander.SSHCommander{"root", "localhost", 22, ""}
   actualResult, _ := commander.CreateCommandString("echo a different command")
-  assert.Equal(t, "ssh -p 22 root@localhost \"echo a different command\"", actualResult)
+  assert.Equal(t, "ssh -p 22 root@localhost echo a different command", actualResult)
 }
 func TestCreateCommandStringSetsPortHostUser( t *testing.T) {
   commander := sshcommander.SSHCommander{"myuser", "differenthost", 20010, ""}
   actualResult, _ := commander.CreateCommandString("echo hellocommand")
-  assert.Equal(t, "ssh -p 20010 myuser@differenthost \"echo hellocommand\"", actualResult)
+  assert.Equal(t, "ssh -p 20010 myuser@differenthost echo hellocommand", actualResult)
 }
 //////////////////////////////////////////////////////////////////////
 // Check that we can inject an OSCommandExecuter
@@ -52,7 +52,7 @@ func TestCommand_CallsInjectedFakeExecuter( t *testing.T) {
   commander := sshcommander.SSHCommander{"myuser", "differenthost", 20010, ""}
   commander.Command("cat /etc/issue")
   assert.Equal(t, true, globalCheck)
-  assert.Equal(t, "ssh -p 20010 myuser@differenthost \"cat /etc/issue\"", globalCommandString)
+  assert.Equal(t, "ssh -p 20010 myuser@differenthost cat /etc/issue", globalCommandString)
 }
 
 func TestCommand_CallsInjectedFakeExecuter_ReturnsOutput( t *testing.T) {
@@ -60,5 +60,5 @@ func TestCommand_CallsInjectedFakeExecuter_ReturnsOutput( t *testing.T) {
   sshcommander.InjectOSCommandExecuter(faker)
   commander := sshcommander.SSHCommander{"myuser", "differenthost", 20010, ""}
   out, _ := commander.Command("cat /etc/issue")
-  assert.Equal(t, "", out)
+  assert.Equal(t, "dummy string outputted from FakeOSCommandExecuter.Execute()", out)
 }
