@@ -32,9 +32,11 @@ type FakeOSCommandExecuter struct {}
 var globalCheck bool = false
 var globalCommandString string
 
-func (f FakeOSCommandExecuter) Execute(commandstring string) {
+func (f FakeOSCommandExecuter) Execute(commandstring string) (out string, err error) {
   globalCheck = true
   globalCommandString  = commandstring
+  out = "dummy string outputted from FakeOSCommandExecuter.Execute()"
+  return
 }
 
 func TestInjectOSCommandExecuter( t *testing.T) {

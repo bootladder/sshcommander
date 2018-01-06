@@ -14,7 +14,7 @@ type SSHCommander struct {
 var myOSCommandExecuter OSCommandExecuter
 
 type OSCommandExecuter interface {
-  Execute(commandstring string)
+  Execute(commandstring string) (string,error)
 }
 
 
