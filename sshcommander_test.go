@@ -27,3 +27,9 @@ func TestCreateCommandStringSetsPortHostUser( t *testing.T) {
   assert.Equal(t, "ssh -p 20010 myuser@differenthost \"echo hellocommand\"", actualResult)
 }
 //////////////////////////////////////////////////////////////////////
+// Check that we can inject an OSCommandExecuter
+type FakeOSCommandExecuter struct {}
+func TestInjectOSCommandExecuter( t *testing.T) {
+  faker := FakeOSCommandExecuter{}
+  sshcommander.InjectOSCommandExecuter(faker)
+}
