@@ -16,9 +16,9 @@ func (r RealOSCommandExecuter) Execute(commandstring string) (out string, err er
 func main() {
   realCommandExecuter := RealOSCommandExecuter{}
   sshcommander.InjectOSCommandExecuter(realCommandExecuter)
-  commander := sshcommander.SSHCommander{"steve", "localhost", 22, ""}
+  commander := sshcommander.SSHCommander{"root", "209.148.82.100", 22, ""}
 
-  out, _ := commander.Command("echo I can echo stdout")
+  out, _ := commander.Command("cat /etc/issue")
 
   fmt.Println(out)
 }
