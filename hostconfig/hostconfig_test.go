@@ -49,5 +49,9 @@ func TestGettersForValidHostname( t *testing.T) {
   }
 
   assert.Equal(t, "22", hostconfig.HostGetPort("myfirsthostname"))
+  assert.Equal(t, "22", hostconfig.HostGetPort("mysecondhostname"))
+  assert.Equal(t, "localhost", hostconfig.HostGetHostname("mysecondhostname"))
+  assert.Equal(t, "steve", hostconfig.HostGetUser("myfirsthostname"))
+  assert.Equal(t, "", hostconfig.HostGetKey("myfirsthostname"))
 
 }

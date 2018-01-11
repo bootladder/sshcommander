@@ -50,3 +50,30 @@ func HostGetPort(hostname string) (port string) {
   }
   return ""
 }
+func HostGetHostname(hostname string) (port string) {
+
+  for i := 0; i < len(myhostconfig.Hosts); i++ {
+    if hostname == myhostconfig.Hosts[i].Name {
+        return myhostconfig.Hosts[i].Host.Hostname
+    }
+  }
+  return ""
+}
+func HostGetUser(hostname string) (port string) {
+
+  for i := 0; i < len(myhostconfig.Hosts); i++ {
+    if hostname == myhostconfig.Hosts[i].Name {
+        return myhostconfig.Hosts[i].Host.User
+    }
+  }
+  return ""
+}
+func HostGetKey(hostname string) (port string) {
+
+  for i := 0; i < len(myhostconfig.Hosts); i++ {
+    if hostname == myhostconfig.Hosts[i].Name {
+        return myhostconfig.Hosts[i].Host.Key
+    }
+  }
+  return ""
+}
