@@ -1,7 +1,7 @@
 package sshcommandcreator_test
 
 import (
-  "sshcommander/sshcommandcreator"
+  "github.com/bootladder/sshcommander/sshcommandcreator"
   "testing"
   "github.com/stretchr/testify/assert"
 )
