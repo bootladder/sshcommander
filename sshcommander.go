@@ -5,20 +5,29 @@ import(
   "github.com/bootladder/sshcommander/hostconfig"
   "fmt"
   "os"
+  "os/user"
   "flag"
 )
+
+func GetPathToConfigFile() (path string) {
+
+  usr, _ := user.Current()
+  dir := usr.HomeDir
+  return dir + "/.sshcommander/hostconfig.json"
+}
 
 func main() {
 
   flag.Parse()
-  if flag.NArg() == 0 { //need atleast 1 argument after flags
+  if flag.NArg() < 2 {
+    fmt.Println("need atleast 2 arguments after flags, hostname and command")
     flag.Usage()
     os.Exit(1)
   }
-  var pathtoconfigfile string = "~/.sshcommander/hostconfig.json"
+  pathtoconfigfile := GetPathToConfigFile()
   err := hostconfig.Load(pathtoconfigfile)
   if err != nil {
-    fmt.Println("Error loading hostconfig")
+    fmt.Printf("hostconfig.Load : %s\n",err)
     os.Exit(1)
   }
 
@@ -33,4 +42,3 @@ func main() {
   fmt.Println(out)
   os.Exit(0)
 }
-

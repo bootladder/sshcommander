@@ -4,7 +4,6 @@ import (
   "errors"
   "encoding/json"
   "io/ioutil"
-  "fmt"
 )
 
 type HostConfigFile struct {
@@ -23,7 +22,7 @@ type HostConfigFile struct {
 var myhostconfig HostConfigFile
 
 func Load(pathtoconfigfile string) (err error) {
-    fmt.Println("Loading Conf File into Memory")
+
     raw, err := ioutil.ReadFile(pathtoconfigfile)
     if err != nil {
         return
