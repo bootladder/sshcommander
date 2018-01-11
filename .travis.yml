@@ -1,8 +1,16 @@
 language: go
 go:
-  - 1.7
+  - master
 
 #
 install: true
+
+addons:
+  apt:
+    sources:
+    - sourceline: 'ppa:duggan/bats'
+    packages:
+    - bats
+    - bc
 
 script: ./build.sh
