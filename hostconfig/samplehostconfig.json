@@ -1,9 +1,25 @@
 {
-  "name":"myfirsthostname",
-  "host": {
-      "hostname":"localhost",
-      "port":22,
-      "key":"",
-      "user":"steve"
-  }
+  "meta":"data123",
+  "hosts":
+  [
+    {
+        "name":"myfirsthostname",
+        "host": {
+            "hostname":"localhost",
+            "port":22,
+            "key":"",
+            "user":"steve"
+        }
+    },
+    {
+        "name":"mysecondhostname",
+        "host": {
+            "hostname":"localhost",
+            "port":22,
+            "key":"",
+            "user":"steve"
+        }
+    }
+  ]
+
 }

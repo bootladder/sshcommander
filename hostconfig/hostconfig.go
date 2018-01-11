@@ -8,13 +8,16 @@ import (
 )
 
 type HostConfigFile struct {
-	Name string `json:"name"`
-	Host struct {
-		Hostname string `json:"hostname"`
-		Port     int    `json:"port"`
-		Key      string `json:"key"`
-		User     string `json:"user"`
-	} `json:"host"`
+	Meta  string `json:"meta"`
+	Hosts []struct {
+		Name string `json:"name"`
+		Host struct {
+			Hostname string `json:"hostname"`
+			Port     int    `json:"port"`
+			Key      string `json:"key"`
+			User     string `json:"user"`
+		} `json:"host"`
+	} `json:"hosts"`
 }
 
 var myhostconfig HostConfigFile
@@ -25,16 +28,14 @@ func Load(pathtoconfigfile string) (err error) {
     if err != nil {
         return
     }
-    fmt.Printf("%s",raw)
     json.Unmarshal(raw, &myhostconfig)
-    fmt.Printf("Results: %v\n", myhostconfig)
-    fmt.Printf("name: %v\n", myhostconfig.Name)
-    //return errors.New("i'm failing here")
-    return nil
+    return
 }
 func LookupHostname(hostname string) (err error) {
-  if hostname == myhostconfig.Name {
-      return
+  for i := 0; i < len(myhostconfig.Hosts); i++ {
+    if hostname == myhostconfig.Hosts[i].Name {
+        return
+    }
   }
-  return errors.New("i'm failing here")
+  return errors.New("Hostname Not Found")
 }

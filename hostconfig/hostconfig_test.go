@@ -24,9 +24,7 @@ func TestLoadConfigInvalidFilename( t *testing.T) {
 
 func TestLookupHostnameInvalidReturnsError( t *testing.T) {
 
-  usr, _ := user.Current()
-  dir := usr.HomeDir
-  err := hostconfig.Load(dir + "/.sshcommander/hostconfig.json")
+  err := hostconfig.Load("./samplehostconfig.json")
   err = hostconfig.LookupHostname("invalidhostname")
   assert.NotEqual(t, nil, err)
 }
@@ -38,5 +36,7 @@ func TestLookupHostnameValid( t *testing.T) {
     fmt.Println(err)
   }
   err = hostconfig.LookupHostname("myfirsthostname")
+  assert.Equal(t, nil, err)
+  err = hostconfig.LookupHostname("mysecondhostname")
   assert.Equal(t, nil, err)
 }
