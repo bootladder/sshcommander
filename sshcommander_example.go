@@ -1,7 +1,7 @@
 package main
 
 import(
-  "sshcommander/sshcommandcreator"
+  "github.com/sshcommander/sshcommandcreator"
   "fmt"
 )
 
