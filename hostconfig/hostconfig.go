@@ -13,7 +13,7 @@ type HostConfigFile struct {
 		Name string `json:"name"`
 		Host struct {
 			Hostname string `json:"hostname"`
-			Port     int    `json:"port"`
+			Port     string `json:"port"`
 			Key      string `json:"key"`
 			User     string `json:"user"`
 		} `json:"host"`
@@ -38,4 +38,15 @@ func LookupHostname(hostname string) (err error) {
     }
   }
   return errors.New("Hostname Not Found")
+}
+
+
+func HostGetPort(hostname string) (port string) {
+
+  for i := 0; i < len(myhostconfig.Hosts); i++ {
+    if hostname == myhostconfig.Hosts[i].Name {
+        return myhostconfig.Hosts[i].Host.Port
+    }
+  }
+  return ""
 }

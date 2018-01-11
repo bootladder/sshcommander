@@ -40,3 +40,14 @@ func TestLookupHostnameValid( t *testing.T) {
   err = hostconfig.LookupHostname("mysecondhostname")
   assert.Equal(t, nil, err)
 }
+
+func TestGettersForValidHostname( t *testing.T) {
+
+  err := hostconfig.Load("./samplehostconfig.json")
+  if err != nil {
+    fmt.Println(err)
+  }
+
+  assert.Equal(t, "22", hostconfig.HostGetPort("myfirsthostname"))
+
+}
