@@ -1,0 +1,9 @@
+{
+  "name":"myfirsthostname",
+  "host": {
+      "hostname":"localhost",
+      "port":22,
+      "key":"",
+      "user":"steve"
+  }
+}
