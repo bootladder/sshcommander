@@ -2,4 +2,7 @@ language: go
 go:
   - 1.7
 
+#
+install: true
+
 script: ./build.sh
