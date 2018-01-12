@@ -80,3 +80,12 @@ func HostGetKey(hostname string) (port string) {
   }
   return ""
 }
+func HostGetBehind(hostname string) (port string) {
+
+  for i := 0; i < len(myhostconfig.Hosts); i++ {
+    if hostname == myhostconfig.Hosts[i].Name {
+        return myhostconfig.Hosts[i].Behind
+    }
+  }
+  return ""
+}
