@@ -18,6 +18,25 @@ func GetPathToConfigFile() (path string) {
   return dir + "/.sshcommander/hostconfig.json"
 }
 
+func CreateCommandLine( thishost string, joinedargs string ) (out string){
+
+  port := hostconfig.HostGetPort(thishost )
+  user := hostconfig.HostGetUser(thishost )
+  key := hostconfig.HostGetKey(thishost )
+  hostname := hostconfig.HostGetHostname(thishost )
+
+  //creator := sshcommandcreator.SSHCommandCreator{"root", "111.111.11.111", 22, ""}
+  creator := sshcommandcreator.SSHCommandCreator{}
+  creator.Port = port
+  creator.User = user
+  creator.Hostname = hostname
+  creator.Key = key
+
+  out, _ = creator.CreateCommandString( joinedargs )
+  fmt.Println(out)
+  return
+}
+
 func main() {
   donotexecute := flag.Bool("N", false, "Don't execute, just print the command")
   flag.Parse()
@@ -43,20 +62,8 @@ func main() {
   thishost := argslice[0]
   joinedargs := strings.Join(argslice[1:]," ")
 
-  port := hostconfig.HostGetPort(thishost )
-  user := hostconfig.HostGetUser(thishost )
-  key := hostconfig.HostGetKey(thishost )
-  hostname := hostconfig.HostGetHostname(thishost )
+  out := CreateCommandLine( thishost, joinedargs )
 
-  //creator := sshcommandcreator.SSHCommandCreator{"root", "111.111.11.111", 22, ""}
-  creator := sshcommandcreator.SSHCommandCreator{}
-  creator.Port = port
-  creator.User = user
-  creator.Hostname = hostname
-  creator.Key = key
-
-  out, _ := creator.CreateCommandString( joinedargs )
-  fmt.Println(out)
   if *donotexecute {
     os.Exit(0)
   }
