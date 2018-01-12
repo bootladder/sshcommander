@@ -27,7 +27,7 @@ func main() {
   pathtoconfigfile := GetPathToConfigFile()
   err := hostconfig.Load(pathtoconfigfile)
   if err != nil {
-    fmt.Printf("hostconfig.Load : %s\n",err)
+    fmt.Printf("Error loading hostconfig: %s\n",err)
     os.Exit(1)
   }
 

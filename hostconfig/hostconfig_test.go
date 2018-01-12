@@ -3,18 +3,9 @@ package hostconfig_test
 import(
   "github.com/bootladder/sshcommander/hostconfig"
   "github.com/stretchr/testify/assert"
-  "os/user"
   "fmt"
   "testing"
 )
-
-func TestLoadDefaultConfig( t *testing.T) {
-
-  usr, _ := user.Current()
-  dir := usr.HomeDir
-  err := hostconfig.Load(dir + "/.sshcommander/hostconfig.json")
-  assert.Equal(t, nil, err)
-}
 
 func TestLoadConfigInvalidFilename( t *testing.T) {
 
