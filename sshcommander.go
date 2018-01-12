@@ -6,6 +6,7 @@ import(
   "fmt"
   "os"
   "os/user"
+  "os/exec"
   "flag"
 )
 
@@ -53,5 +54,8 @@ func main() {
 
   out, _ := creator.CreateCommandString( flag.Arg(1))
   fmt.Println(out)
+  bytesout,err := exec.Command("sh","-c",out).Output()
+  fmt.Println(string(bytesout))
+
   os.Exit(0)
 }
