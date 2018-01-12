@@ -24,20 +24,20 @@
         "name":"myfirstnestedhostname",
         "behind":"myfirsthostname",
         "host": {
-            "hostname":"localhost",
+            "hostname":"nestedlocalhost1",
             "port":"22",
             "key":"",
-            "user":"steve"
+            "user":"steve1"
         }
     },
     {
         "name":"mysecondnestedhostname",
         "behind":"myfirstnestedhostname",
         "host": {
-            "hostname":"localhost",
+            "hostname":"nestedlocalhost2",
             "port":"22",
             "key":"",
-            "user":"steve"
+            "user":"steve2"
         }
     }
   ]

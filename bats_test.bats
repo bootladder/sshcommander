@@ -60,5 +60,10 @@
 @test "Nested Host correct commandline" {
     mkdir -p ~/.sshcommander
     cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
-    ./sshcommander -N myfirstnestedhostname echo hello | grep -i "myfirsthostname"
+    ./sshcommander -N myfirstnestedhostname echo hello | grep -i "steve" | grep -i "steve1"
+}
+@test "Nested Host correct commandline double nested" {
+    mkdir -p ~/.sshcommander
+    cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
+    ./sshcommander -N mysecondnestedhostname echo hello | grep -i "steve" | grep -i "steve1" | grep -i "steve2"
 }

@@ -25,7 +25,6 @@ func CreateCommandLine( thishost string, joinedargs string ) (out string){
   key := hostconfig.HostGetKey(thishost )
   hostname := hostconfig.HostGetHostname(thishost )
 
-  //creator := sshcommandcreator.SSHCommandCreator{"root", "111.111.11.111", 22, ""}
   creator := sshcommandcreator.SSHCommandCreator{}
   creator.Port = port
   creator.User = user
@@ -33,7 +32,12 @@ func CreateCommandLine( thishost string, joinedargs string ) (out string){
   creator.Key = key
 
   out, _ = creator.CreateCommandString( joinedargs )
-  fmt.Println(out)
+  //fmt.Println(out)
+
+
+  if hostconfig.HostGetBehind(thishost) != "" {
+    out = CreateCommandLine(hostconfig.HostGetBehind(thishost), out )
+  }
   return
 }
 
@@ -63,6 +67,7 @@ func main() {
   joinedargs := strings.Join(argslice[1:]," ")
 
   out := CreateCommandLine( thishost, joinedargs )
+  fmt.Println(out)
 
   if *donotexecute {
     os.Exit(0)
