@@ -19,6 +19,26 @@
             "key":"",
             "user":"steve"
         }
+    },
+    {
+        "name":"mynestedhostname",
+        "behind":"myfirsthostname",
+        "host": {
+            "hostname":"localhost",
+            "port":"22",
+            "key":"",
+            "user":"steve"
+        }
+    },
+    {
+        "name":"mysecondnestedhostname",
+        "behind":"mynestedhostname",
+        "host": {
+            "hostname":"localhost",
+            "port":"22",
+            "key":"",
+            "user":"steve"
+        }
     }
   ]
 

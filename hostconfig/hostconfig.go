@@ -10,6 +10,7 @@ type HostConfigFile struct {
 	Meta  string `json:"meta"`
 	Hosts []struct {
 		Name string `json:"name"`
+		Behind string `json:"behind"`
 		Host struct {
 			Hostname string `json:"hostname"`
 			Port     string `json:"port"`
