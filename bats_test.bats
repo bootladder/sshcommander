@@ -42,3 +42,17 @@
     cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
     ./sshcommander myinvalidhost echo hello | grep -i "invalid hostname"
 }
+
+##########################################################
+#
+@test "Test feature only prints the command, does not execute" {
+    mkdir -p ~/.sshcommander
+    cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
+    ./sshcommander -N myfirsthostname echo hello | grep -i "ssh"
+}
+
+@test "Multiple Arguments in commandline show up" {
+    mkdir -p ~/.sshcommander
+    cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
+    ./sshcommander -N myfirsthostname echo hello | grep -i "echo hello"
+}

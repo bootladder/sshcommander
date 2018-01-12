@@ -8,6 +8,7 @@ import(
   "os/user"
   "os/exec"
   "flag"
+  "strings"
 )
 
 func GetPathToConfigFile() (path string) {
@@ -18,7 +19,7 @@ func GetPathToConfigFile() (path string) {
 }
 
 func main() {
-
+  donotexecute := flag.Bool("N", false, "Don't execute, just print the command")
   flag.Parse()
   if flag.NArg() < 2 {
     fmt.Println("need atleast 2 arguments after flags, hostname and command")
@@ -52,8 +53,12 @@ func main() {
   creator.Hostname = hostname
   creator.Key = key
 
-  out, _ := creator.CreateCommandString( flag.Arg(1))
+  joinedargs := strings.Join(flag.Args()," ")
+  out, _ := creator.CreateCommandString( joinedargs )
   fmt.Println(out)
+  if *donotexecute {
+    os.Exit(0)
+  }
   bytesout,err := exec.Command("sh","-c",out).Output()
   fmt.Println(string(bytesout))
 
