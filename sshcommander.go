@@ -40,6 +40,7 @@ func main() {
   }
 
   thishost := flag.Arg(0)
+  joinedargs := strings.Join(flag.Args()," ")
 
   port := hostconfig.HostGetPort(thishost )
   user := hostconfig.HostGetUser(thishost )
@@ -53,7 +54,6 @@ func main() {
   creator.Hostname = hostname
   creator.Key = key
 
-  joinedargs := strings.Join(flag.Args()," ")
   out, _ := creator.CreateCommandString( joinedargs )
   fmt.Println(out)
   if *donotexecute {

@@ -21,7 +21,7 @@
         }
     },
     {
-        "name":"mynestedhostname",
+        "name":"myfirstnestedhostname",
         "behind":"myfirsthostname",
         "host": {
             "hostname":"localhost",
@@ -32,7 +32,7 @@
     },
     {
         "name":"mysecondnestedhostname",
-        "behind":"mynestedhostname",
+        "behind":"myfirstnestedhostname",
         "host": {
             "hostname":"localhost",
             "port":"22",

@@ -56,3 +56,9 @@
     cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
     ./sshcommander -N myfirsthostname echo hello | grep -i "echo hello"
 }
+
+@test "Nested Host correct commandline" {
+    mkdir -p ~/.sshcommander
+    cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
+    ./sshcommander -N myfirstnestedhostname echo hello | grep -i "myfirsthostname"
+}
