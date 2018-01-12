@@ -1,0 +1,19 @@
+{
+  "meta":"data123",
+  "templates":
+  [
+    {
+        "name":"myfirsttemplate",
+        "template": {
+            "command":"echo i echoed $1 back to you!",
+        }
+    },
+    {
+        "name":"mysecondtemplate",
+        "template": {
+            "command":"echo hello $1 $2"
+        }
+    },
+  ]
+
+}
