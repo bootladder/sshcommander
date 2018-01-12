@@ -39,8 +39,9 @@ func main() {
     os.Exit(1)
   }
 
-  thishost := flag.Arg(0)
-  joinedargs := strings.Join(flag.Args()," ")
+  argslice := flag.Args()
+  thishost := argslice[0]
+  joinedargs := strings.Join(argslice[1:]," ")
 
   port := hostconfig.HostGetPort(thishost )
   user := hostconfig.HostGetUser(thishost )

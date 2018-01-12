@@ -54,7 +54,7 @@
 @test "Multiple Arguments in commandline show up" {
     mkdir -p ~/.sshcommander
     cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
-    ./sshcommander -N myfirsthostname echo hello | grep -i "echo hello"
+    ./sshcommander -N myfirsthostname echo hello | grep -i "localhost echo hello"
 }
 
 @test "Nested Host correct commandline" {
