@@ -32,8 +32,13 @@
     rm -rf ~/.sshcommander
     ./sshcommander myinvalidhost echo hello | grep -i "error loading hostconfig"
 }
-@test "Valid default hostconfig invalid hostname returns error msg" {
+@test "Invalid default hostconfig returns error msg" {
     mkdir -p ~/.sshcommander
     echo blah > ~/.sshcommander/hostconfig.json
+    ./sshcommander myinvalidhost echo hello | grep -i "invalid"
+}
+@test "Valid default hostconfig invalid hostname returns error msg" {
+    mkdir -p ~/.sshcommander
+    cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
     ./sshcommander myinvalidhost echo hello | grep -i "invalid hostname"
 }

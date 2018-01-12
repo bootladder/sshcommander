@@ -27,7 +27,10 @@ func Load(pathtoconfigfile string) (err error) {
     if err != nil {
         return
     }
-    json.Unmarshal(raw, &myhostconfig)
+    err = json.Unmarshal(raw, &myhostconfig)
+    if err != nil {
+        return
+    }
     return
 }
 func LookupHostname(hostname string) (err error) {

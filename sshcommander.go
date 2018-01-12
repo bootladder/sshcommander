@@ -37,8 +37,21 @@ func main() {
     os.Exit(1)
   }
 
-  creator := sshcommandcreator.SSHCommandCreator{"root", "111.111.11.111", 22, ""}
-  out, _ := creator.CreateCommandString("cat /etc/issue")
+  thishost := flag.Arg(0)
+
+  port := hostconfig.HostGetPort(thishost )
+  user := hostconfig.HostGetUser(thishost )
+  key := hostconfig.HostGetKey(thishost )
+  hostname := hostconfig.HostGetHostname(thishost )
+
+  //creator := sshcommandcreator.SSHCommandCreator{"root", "111.111.11.111", 22, ""}
+  creator := sshcommandcreator.SSHCommandCreator{}
+  creator.Port = port
+  creator.User = user
+  creator.Hostname = hostname
+  creator.Key = key
+
+  out, _ := creator.CreateCommandString( flag.Arg(1))
   fmt.Println(out)
   os.Exit(0)
 }
