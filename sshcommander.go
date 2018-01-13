@@ -73,12 +73,12 @@ func main() {
     os.Exit(0)
   }
 
-  cmd := exec.Command("sh","-c",out)
+  mystrings := strings.Fields(out)
+  cmd := exec.Command(mystrings[0],mystrings[1:]...)
   cmd.Stdout = os.Stdout
   cmd.Stdin = os.Stdin
   cmd.Stderr = os.Stderr
-  bytesout,err  := cmd.CombinedOutput()
-  fmt.Println(string(bytesout))
+  cmd.Run()
 
   os.Exit(0)
 }
