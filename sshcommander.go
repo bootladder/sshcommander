@@ -72,7 +72,12 @@ func main() {
   if *donotexecute {
     os.Exit(0)
   }
-  bytesout,err := exec.Command("sh","-c",out).CombinedOutput()
+
+  cmd := exec.Command("sh","-c",out)
+  cmd.Stdout = os.Stdout
+  cmd.Stdin = os.Stdin
+  cmd.Stderr = os.Stderr
+  bytesout,err  := cmd.CombinedOutput()
   fmt.Println(string(bytesout))
 
   os.Exit(0)
