@@ -1,5 +1,6 @@
 #!/usr/bin/env bats
 
+
 @test "Check that the executable exists" {
     command -v ./sshcommander
 }
@@ -66,4 +67,11 @@
     mkdir -p ~/.sshcommander
     cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
     ./sshcommander -N mysecondnestedhostname echo hello | grep -i "steve" | grep -i "steve1" | grep -i "steve2"
+}
+
+##########################################################
+@test "Valid template config " {
+    mkdir -p ~/.sshcommander
+    cp templateconfig/sampletemplateconfig.json ~/.sshcommander/templateconfig.json
+    ./sshcommander -N myfirsthostname echo hello | grep -i "invalid hostname"
 }
