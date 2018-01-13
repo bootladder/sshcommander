@@ -1,16 +1,16 @@
 language: go
 go:
-  - master
-
-#
-#install: true
-
+- master
 addons:
   apt:
     sources:
-    - sourceline: 'ppa:duggan/bats'
+    - sourceline: ppa:duggan/bats
     packages:
     - bats
     - bc
+script: "./build.sh"
 
-script: ./build.sh
+
+notifications:
+  slack:
+    secure: dZJ1lWa/GyaGcUXrVjwPuve5jF3A3LdBpRhxXzFAc9ZTkEzRQZy3gGdOMDirzZHroy862ksFu5kHFHBSIxIbXdz0Gn5tTKKXu5/0i40qYgfMhPOWGX/2TwgvZsRiRD+1DO+KSqYn2n04UB9kX6Mpo0sszZXrF0aWX9uIFh99fNeI3yNZysMnc9RuOj0VAVvhLhqxRk2cTrk4x9bd9MQ7w/WpM4gNxGVjpWqBnbLSmhUZd6Mie/zzuqiUnVHwE4dUqF6er2/Nr0kEKjVcygr8h3KpT7+B5NEYb8Xc99e3dJ66VnRLurGe+pJSgZfwb/EIgxOIy++B7eDxWptoxP/ukzKftgYGZOulPc76YovexVBMrZfqhdlEwobnI9nEaZhnXFT48pVENKAc7bnIUQ4p+brTDV1nUvhlwUjpFpcbobXPQ+mCnmCi5HxevEqCrHG9PER8oF2NX6dqGevJvavDQpEzmLojJeNwDdbHMCJd1sY6lPkMNLy3kmGKP4tlYIflMjOukJn7t3d+cUU6oaRdjZtqxxt2swWehCYKpLMSOVmA2B3Sl7yg9AjOgqbAmnNGwwitDhqaYnWLcfXX3iHqKNUbwsUUkDEjU5mNnKHELYNL+5owhf/O7IPChfVSA380uFjhER0bs4ajPWwp5I1p5HXGPkioZ8PIPJXAAg115cc=
