@@ -28,6 +28,9 @@ func (s *SSHCommandCreator) CreateCommandString(commandstring string) (out strin
   if s.AdditionalArgs != "" {
     cmd = append(cmd, s.AdditionalArgs)
   }
+  if s.Key != "" {
+    cmd = append(cmd, "-i",s.Key)
+  }
     //fmt.Sprintf("%s", s.AdditionalArgs),
   lastpart :=  fmt.Sprintf("-p %s %s@%s", s.Port, s.User, s.Hostname)
   cmd = append(cmd, lastpart, commandstring)

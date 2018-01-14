@@ -1,6 +1,8 @@
 #!/usr/bin/env bats
 
-
+######################################################
+#  Host Config Parsing
+######################################################
 @test "Check that the executable exists" {
     command -v ./sshcommander
 }

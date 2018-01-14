@@ -30,6 +30,12 @@ func TestCreateCommandStringSetsPortHostUser( t *testing.T) {
   actualResult, _ := creator.CreateCommandString("echo hellocommand")
   assert.Equal(t, "ssh -p 20010 myuser@differenthost echo hellocommand", actualResult)
 }
+func TestCreateCommandStringSetsKey( t *testing.T) {
+  creator := sshcommandcreator.SSHCommandCreator{}
+  creator.Create("myuser", "differenthost", "20010", "/path/to/mykey")
+  actualResult, _ := creator.CreateCommandString("echo hellocommand")
+  assert.Equal(t, "ssh -i /path/to/mykey -p 20010 myuser@differenthost echo hellocommand", actualResult)
+}
 //////////////////////////////////////////////////////////////////////
 //Nesting Tests
 func TestCreateCommandStringNestedWorks( t *testing.T) {
