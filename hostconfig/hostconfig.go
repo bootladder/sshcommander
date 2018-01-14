@@ -34,6 +34,16 @@ func Load(pathtoconfigfile string) (err error) {
     }
     return
 }
+func String() string {
+
+    b, err := json.MarshalIndent(myhostconfig, "","  ")
+    if err != nil {
+        return "Bad JSON"
+    }
+    return string(b)
+
+}
+
 func LookupHostname(hostname string) (err error) {
   for i := 0; i < len(myhostconfig.Hosts); i++ {
     if hostname == myhostconfig.Hosts[i].Name {

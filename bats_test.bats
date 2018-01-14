@@ -87,3 +87,8 @@
     cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
     ./sshcommander -t -N mysecondnestedhostname echo hello | grep -i "\-t"
 }
+@test "-l flag prints hosts from config" {
+    mkdir -p ~/.sshcommander
+    cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
+    ./sshcommander -l | grep -i "Configured Hosts:"
+}

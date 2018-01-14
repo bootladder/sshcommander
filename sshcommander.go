@@ -14,6 +14,7 @@ import(
 var globalInitFlag bool = true
 var donotexecute * bool
 var pty_dash_t_flag * bool
+var list_hosts_flag * bool
 var addionalargs string = ""
 
 
@@ -57,18 +58,24 @@ func CreateCommandLine( thishost string, joinedargs string ) (out string){
 func main() {
   donotexecute = flag.Bool("N", false, "Don't execute, just print the command")
   pty_dash_t_flag = flag.Bool("t", false, "pass -t to ssh, for pseudo-tty")
+  list_hosts_flag = flag.Bool("l", false, "Lists Hosts from Config File")
 
   flag.Parse()
-  if flag.NArg() < 2 {
-    fmt.Println("need atleast 2 arguments after flags, hostname and command")
-    flag.Usage()
-    os.Exit(1)
-  }
+  //if flag.NArg() < 2 {
+  //  fmt.Println("need atleast 2 arguments after flags, hostname and command")
+  //  flag.Usage()
+  //  os.Exit(1)
+  //}
   pathtoconfigfile := GetPathToConfigFile()
   err := hostconfig.Load(pathtoconfigfile)
   if err != nil {
     fmt.Printf("Error loading hostconfig: %s\n",err)
     os.Exit(1)
+  }
+
+  if *list_hosts_flag {
+    fmt.Println("Configured Hosts:")
+    fmt.Println(hostconfig.String())
   }
 
   err = hostconfig.LookupHostname(flag.Arg(0))
