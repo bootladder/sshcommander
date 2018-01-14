@@ -11,6 +11,12 @@ import(
   "strings"
 )
 
+var globalInitFlag bool = true
+var donotexecute * bool
+var pty_dash_t_flag * bool
+var addionalargs string = ""
+
+
 func GetPathToConfigFile() (path string) {
 
   usr, _ := user.Current()
@@ -20,6 +26,12 @@ func GetPathToConfigFile() (path string) {
 
 func CreateCommandLine( thishost string, joinedargs string ) (out string){
 
+  if globalInitFlag {
+    globalInitFlag = false
+    if * pty_dash_t_flag {
+      addionalargs = "-t"
+    }
+  }
   port := hostconfig.HostGetPort(thishost )
   user := hostconfig.HostGetUser(thishost )
   key := hostconfig.HostGetKey(thishost )
@@ -30,6 +42,7 @@ func CreateCommandLine( thishost string, joinedargs string ) (out string){
   creator.User = user
   creator.Hostname = hostname
   creator.Key = key
+  creator.AdditionalArgs = addionalargs
 
   out, _ = creator.CreateCommandString( joinedargs )
   //fmt.Println(out)
@@ -42,7 +55,9 @@ func CreateCommandLine( thishost string, joinedargs string ) (out string){
 }
 
 func main() {
-  donotexecute := flag.Bool("N", false, "Don't execute, just print the command")
+  donotexecute = flag.Bool("N", false, "Don't execute, just print the command")
+  pty_dash_t_flag = flag.Bool("t", false, "pass -t to ssh, for pseudo-tty")
+
   flag.Parse()
   if flag.NArg() < 2 {
     fmt.Println("need atleast 2 arguments after flags, hostname and command")

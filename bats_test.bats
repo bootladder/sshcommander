@@ -75,3 +75,13 @@
     cp templateconfig/sampletemplateconfig.json ~/.sshcommander/templateconfig.json
     ./sshcommander -N myfirsthostname echo hello | grep -i "invalid hostname"
 }
+
+
+##########################################################
+#  ARGUMENT FLAGS
+##########################################################
+@test "-t flag shows up in valid command" {
+    mkdir -p ~/.sshcommander
+    cp hostconfig/samplehostconfig.json ~/.sshcommander/hostconfig.json
+    ./sshcommander -t -N mysecondnestedhostname echo hello | grep -i "\-t"
+}
