@@ -76,6 +76,7 @@ func main() {
   if *list_hosts_flag {
     fmt.Println("Configured Hosts:")
     fmt.Println(hostconfig.String())
+    os.Exit(0)
   }
 
   err = hostconfig.LookupHostname(flag.Arg(0))
