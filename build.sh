@@ -1,5 +1,6 @@
 #!/bin/bash
 echo Building the main executable
+go get -t -u ./...
 go build -o sshcommander || exit 1
 echo Running Unit Tests
 go test ./... || exit 1
